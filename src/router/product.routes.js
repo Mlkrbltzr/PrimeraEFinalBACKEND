@@ -2,10 +2,14 @@ import {Router} from "express";
 import ProductManager from "../controllers/ProductManager.js";
 
 
-
+const productRouter = Router();
 const product = new ProductManager();
 
-const productRouter = Router();
+
+productRouter.get("/", async (req, res)=>{
+    res.send(await product.getProducts());
+});
+
 
 productRouter.get("/:id", async (req, res) => {
     let id = req.params.id;
@@ -13,9 +17,7 @@ productRouter.get("/:id", async (req, res) => {
 });
 
 
-productRouter.get("/", async (req, res)=>{
-    res.send(await product.getProducts())
-})
+
 
 
 productRouter.post("/", async (req, res) =>{
